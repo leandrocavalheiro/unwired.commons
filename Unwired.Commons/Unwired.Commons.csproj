@@ -3,6 +3,20 @@
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
+	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+  </PropertyGroup>
+  <PropertyGroup>
+	  <VersionSuffix>0.1.0</VersionSuffix>
+	  <AssemblyVersion Condition=" '$(VersionSuffix)' == '' ">0.0.1</AssemblyVersion>
+	  <AssemblyVersion Condition=" '$(VersionSuffix)' != '' ">$(VersionSuffix)</AssemblyVersion>
+	  <Version Condition=" '$(VersionSuffix)' == '' ">0.0.1</Version>
+	  <Version Condition=" '$(VersionSuffix)' != '' ">$(VersionSuffix)</Version>
+	  <Company>Unwired</Company>
+	  <Authors>Leandro Luiz G. Cavalheiro</Authors>
+	  <Product>Unwired.Commons</Product>
+	  <Description>Commons Methods and Extensions</Description>
+	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
+	  <projectUrl>https://github.com/leandrocavalheiro/unwired.commons</projectUrl>
   </PropertyGroup>
 
   <ItemGroup>
