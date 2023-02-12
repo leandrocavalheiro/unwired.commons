@@ -2,8 +2,6 @@
 
 All notable changes to this project will be documented in this file.
 
-## ⭐ [v0.0.3]
+## ⭐ [v0.0.0]
 
-> 🐛 **Bugfix** - Value convert error on Read/Write Coils.
-> ⌚ **Temporary** - Connection recreated on each request.
-> ⚡ **Feature** - Creation of all Read/Write methods in async version.
+
