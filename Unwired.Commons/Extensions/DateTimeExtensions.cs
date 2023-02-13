@@ -23,7 +23,7 @@ namespace Unwired.Commons.Extensions
             => (value.Kind.Equals(kind)) ? value : DateTime.SpecifyKind(value, kind);
 
         /// <summary>
-        /// Validate whether a datetime is null. It will be considered null if the datetime value is the MinValue
+        /// Validate whether a datetime is null. It will be considered null or empty if the datetime value is the MinValue
         /// </summary>
         /// <param name="value">A datetime</param>
         /// <returns>A bool value</returns>
