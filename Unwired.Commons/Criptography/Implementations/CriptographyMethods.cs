@@ -16,7 +16,7 @@ public class CriptographyMethods : ICriptographyMethods
     {
         _salt = configuration.GetSection("Criptography:Salt").Value.GetValueOrDefault("83ba7e67-4d39-4227-a12d-0657be79e689");
         _cryptoKey = configuration.GetSection("Criptography:Key").Value.GetValueOrDefault("822b6cd1-9368-4b36-8815-8006e23098d2");
-        _interations = configuration.GetSection("Criptography:Interations").Value.GetValueOrDefault("1000").ToInt();
+        _interations = configuration.GetSection("Criptography:Interations").Value.GetValueOrDefault("1000").ToInt();        
     }
 
     public string Encrypt(string text)
