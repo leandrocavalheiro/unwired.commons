@@ -1,5 +1,4 @@
 ﻿using Unwired.Commons.Enumarators;
-using Unwired.Models.ViewModels;
 
 namespace Unwired.Commons.Extensions;
 
