@@ -3,7 +3,6 @@ using System.Resources;
 using System.Xml.Serialization;
 using Unwired.Commons.Enumarators;
 using Unwired.Commons.Extensions;
-using Unwired.Models.Enumarators;
 using Unwired.Models.ViewModels;
 
 namespace Unwired.Commons
@@ -36,22 +35,22 @@ namespace Unwired.Commons
         /// <param name="sortBy">Order of records. Default: null. </param>
         /// <param name="translationResource">Resources file to be used in description translation. Translation rule: The translation file must have a key with the same name as the enum key, the value of this key will be returned.</param>
         /// <returns>A paginated list of type EnumViewModel with the enum information.</returns>
-        public static PaginatedViewModel<EnumViewModel> GetEnumValues(string fullNameEnum, string filter = null, int page = 1, int pageSize = 25, Dictionary<OrderEnum, OrderOrientationEnum> sortBy = null, object translationResource = null)
+        public static UPaginatedViewModel<UEnumViewModel> GetEnumValues(string fullNameEnum, string filter = null, int page = 1, int pageSize = 25, Dictionary<OrderEnum, OrderOrientationEnum> sortBy = null, object translationResource = null)
         {            
             if (fullNameEnum is null)
-                return new PaginatedViewModel<EnumViewModel>(null, page, pageSize, 0, 0);
+                return new UPaginatedViewModel<UEnumViewModel>(null, page, pageSize, 0, 0);
 
             var enumerator = Type.GetType($"{fullNameEnum}");
             if (enumerator is null)
-                return new PaginatedViewModel<EnumViewModel>(null, page, pageSize, 0, 0);
+                return new UPaginatedViewModel<UEnumViewModel>(null, page, pageSize, 0, 0);
 
 
             var values = enumerator.GetEnumValues();
             if (values is null)
-                return new PaginatedViewModel<EnumViewModel>(null, page, pageSize, 0, 0);
+                return new UPaginatedViewModel<UEnumViewModel>(null, page, pageSize, 0, 0);
 
 
-            var enumResult = new List<EnumViewModel>();
+            var enumResult = new List<UEnumViewModel>();
             var total = values.Length;
             var totalPages = (int)Math.Ceiling((total / (decimal)pageSize));
             var description = string.Empty;
@@ -75,7 +74,7 @@ namespace Unwired.Commons
                 if (!string.IsNullOrEmpty(filter) && !description.ToLower().Contains(filter.ToLower()))
                     continue;
 
-                enumResult.Add(new EnumViewModel()
+                enumResult.Add(new UEnumViewModel()
                 {
                     Key = value.ToString(),
                     Value = ((int)value).ToString(),
@@ -86,7 +85,7 @@ namespace Unwired.Commons
             if (sortBy.Count > 0)
             {                
                 var firstOrder = true;
-                IOrderedEnumerable<EnumViewModel> enumOrdered = null;
+                IOrderedEnumerable<UEnumViewModel> enumOrdered = null;
 
                 foreach (var currentSort in sortBy)
                 {
@@ -180,7 +179,7 @@ namespace Unwired.Commons
             }
 
             var records = enumResult.Take(pageSize).Skip(pageSize * (page - 1)).ToList();
-            return new PaginatedViewModel<EnumViewModel>(records, page, pageSize, total, totalPages);
+            return new UPaginatedViewModel<UEnumViewModel>(records, page, pageSize, total, totalPages);
         }
 
         /// <summary>
