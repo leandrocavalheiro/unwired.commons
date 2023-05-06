@@ -32,4 +32,14 @@ public static class EnumeratorsExtensions
 
         return ((T)enumerationValue).GetDescription();       
     }
+
+    /// <summary>
+    /// Convert Enum Value to Int
+    /// </summary>
+    /// <param name="value">Enum Value</param>
+    public static int ToInt(this Enum value)
+    {
+        int.TryParse(value.ToString(), out var result);
+        return result;      
+    }
 }
