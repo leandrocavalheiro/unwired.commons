@@ -14,7 +14,31 @@ public static class IntegerExtensions
 			return defaultValue;
 		}
 	}
-	public static bool IsGreatherThanZero(this int? value)
+    public static int ToIntSafe(this uint? value, int defaultValue = 0)
+    {
+        try
+        {
+            _ = int.TryParse($"{value}", out var result);
+            return result;
+        }
+        catch
+        {
+            return defaultValue;
+        }
+    }
+    public static int ToIntSafe(this uint value, int defaultValue = 0)
+    {
+        try
+        {
+            _ = int.TryParse($"{value}", out var result);
+            return result;
+        }
+        catch
+        {
+            return defaultValue;
+        }
+    }
+    public static bool IsGreatherThanZero(this int? value)
 	{
 		try
 		{
@@ -38,7 +62,19 @@ public static class IntegerExtensions
 			return false;
 		}
 	}
-	public static bool IsGreatherThanZero(this ushort? value)
+    public static bool IsGreatherThanZero(this ushort value)
+    {
+        try
+        {
+            _ = ushort.TryParse($"{value}", out var result);
+            return result > 0;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+    public static bool IsGreatherThanZero(this ushort? value)
 	{
 		try
 		{
