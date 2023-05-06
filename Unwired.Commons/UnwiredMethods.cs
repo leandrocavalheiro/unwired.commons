@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Resources;
+using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 using Unwired.Commons.Enumarators;
 using Unwired.Commons.Extensions;
@@ -7,7 +8,7 @@ using Unwired.Models.ViewModels;
 
 namespace Unwired.Commons
 {
-    public static class UnwiredMethods
+    public static partial class UnwiredMethods
     {
         /// <summary>
         /// Return current datetime with DateTimeKind <br/>
@@ -52,7 +53,7 @@ namespace Unwired.Commons
 
             var enumResult = new List<UEnumViewModel>();
             var total = values.Length;
-            var totalPages = (int)Math.Ceiling((total / (decimal)pageSize));
+            var totalPages = (int)Math.Ceiling(total / (decimal)pageSize);
             var description = string.Empty;
             var orderCount = 0;
             foreach (var value in values)
@@ -60,7 +61,7 @@ namespace Unwired.Commons
                 if (value is null)
                     continue;
 
-                object currentValue = (object)value;
+                object currentValue = value;
 
                 description = currentValue.GetEnumDescription();
                 //translation of description
@@ -218,6 +219,7 @@ namespace Unwired.Commons
         /// <param name="typeResourceFile">Resource File for key search</param>
         /// <returns>String. Value of Key.</returns>
         private static string GetDescriptionFromResourceFile(string key, Type typeResourceFile)
-            => (new ResourceManager(typeResourceFile)).GetString(key);        
+            => new ResourceManager(typeResourceFile).GetString(key);
+
     }
 }

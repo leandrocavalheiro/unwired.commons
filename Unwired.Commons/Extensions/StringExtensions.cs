@@ -2,9 +2,34 @@
 
 namespace Unwired.Commons.Extensions;
 
-public static class StringExtensions
+public static partial class StringExtensions
 {
     private static readonly string OnlyNumbersRegex = "[^0-9]";
+
+    [GeneratedRegex("[A-Z]")]
+    private static partial Regex SnakeCaseRegex();
+    [GeneratedRegex("_[a-z]")]
+    private static partial Regex CamelCaseRegex();
+
+    /// <summary>
+    /// Convert a string value in SnakeCase format
+    /// </summary>
+    /// <param name="value">Value to convert</param>
+    /// <returns>String. Converted value.</returns>
+    public static string ToSnakeCase(this string value)
+        => SnakeCaseRegex().Replace(value, "_$0").ToLower();
+    /// <summary>
+    /// Convert a string value in CamelCase format
+    /// </summary>
+    /// <param name="value">Value to convert</param>
+    /// <returns>String. Converted value.</returns>
+    public static string ToCamelCase(this string value)
+    {
+        return CamelCaseRegex().Replace(value, delegate (Match m) {
+            return m.ToString().TrimStart('_').ToUpper();
+        });
+    }
+
     public static bool Filled(this string value)
         => !string.IsNullOrEmpty(value);    
     public static Guid ToGuid(this string value)
